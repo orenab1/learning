@@ -1,22 +1,44 @@
-<!-- validation, touched, submit-->
+<!-- submitting only relevant form fields-->
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <label>Username</label>
+  <input id="username" name="username" [ngModel]="username" />
 
-<form (ngSubmit)="onSubmit(f)" #f='ngForm'>
-    <label>Username</label>
-    <input
-        id='username'
-        name='username'
-        ngModel
-    >
+  <!-- validate field-->
+  <input id="email" name="email" email required ngModel #email="ngModel" />
+  <span *ngIf="!email.valid && email.touched">Email is not valid</span>
 
-    <input
-        id='email'
-        name='email'
-        email
-        required
-        ngModel
-        #email='ngModel'        
-    >
-    <span *ngIf='!email.valid && email.touched'>Email is not valid</span>
+  <select id="secret" [ngModel]="defaultQuestion" name="secret">
+    <option value="pet">Pet</option>
+    <option value="teacher">teacher</option>
+  </select>
 
-    <button type="submit" [disabled]="!f.valid">submit</button>
+  <!-- two ways binding still works-->
+  <textarea id="free-text" name="free-text" [(ngModel)]="freeText"></textarea>
+
+  <p>free text is {{ freeText }}</p>
+
+  <!-- grouping elements together-->
+  <div ngModelGroup="inputsGroup" #userData="ngModelGroup">
+    <input type="text" name="input1" ngModel required/>
+    <input type="text" name="input2" ngModel required/>
+  </div>
+  <p *ngIf='!userData.valid '>User data is not valid!</p>
+
+  <!-- radio buttons-->
+  <div  *ngFor='let gender of genders'>
+  <input
+    type='radio'
+    name='gender'
+    ngModel
+    [value]='gender'
+    required
+    
+  >
+  <label>{{gender}}</label>
+</div>
+
+    <button (click)="suggestUserName()">Suggest username</button>
+
+  <!-- disable submit button if form is not valid-->
+  <button type="submit" [disabled]="!f.valid">submit</button>
 </form>
