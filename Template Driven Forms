@@ -1,0 +1,22 @@
+<!-- validation, touched, submit-->
+
+<form (ngSubmit)="onSubmit(f)" #f='ngForm'>
+    <label>Username</label>
+    <input
+        id='username'
+        name='username'
+        ngModel
+    >
+
+    <input
+        id='email'
+        name='email'
+        email
+        required
+        ngModel
+        #email='ngModel'        
+    >
+    <span *ngIf='!email.valid && email.touched'>Email is not valid</span>
+
+    <button type="submit" [disabled]="!f.valid">submit</button>
+</form>
