@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "ask-question:build:production",
+            "firebaseProject": "doh-ask-question",
+            "firebaseHostingSite": "doh-ask-question"
+          }
         }
       }
     }

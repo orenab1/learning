@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "doh-ask-question": {
+      "hosting": {
+        "ask-question": [
+          "doh-ask-question"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "doh-ask-question"
+  }
+}
